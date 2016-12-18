@@ -2,7 +2,7 @@
 
 let pow = Math.pow;
 let sqrt = Math.sqrt;
-let inc = x => ++x;
+let inc = x => x + 1;
 let add = (a, b) => a + b;
 let mul = (a, b) => a * b;
 let div = (a, b) => a / b;

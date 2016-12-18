@@ -1,6 +1,6 @@
 'use strict';
 
-let compose = (f1, f2) => (x) => f2(f1(x));
+let compose = (f1, f2) => x => f2(f1(x));
 
 let s = 'MARCUS AURELIUS';
 console.log(s);
