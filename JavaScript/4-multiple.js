@@ -1,7 +1,7 @@
 'use strict';
 
 let compose = (...funcs) => (...args) => (
-  funcs.reduce((args, fn) => [fn.apply(null, args)], args)
+  funcs.reduce((args, fn) => [fn(...args)], args)
 );
 
 let s = '   MARCUS AURELIUS   ';

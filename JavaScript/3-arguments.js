@@ -1,6 +1,6 @@
 'use strict';
 
-let compose = (f1, f2) => (...args) => f2(f1.apply(null, args));
+let compose = (f1, f2) => (...args) => f2(f1(...args));
 
 let s = 'MARCUS AURELIUS';
 console.log(s);
