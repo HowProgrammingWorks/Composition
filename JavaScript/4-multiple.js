@@ -1,21 +1,21 @@
 'use strict';
 
-let compose = (...funcs) => (...args) => (
+const compose = (...funcs) => (...args) => (
   funcs.reduce((args, fn) => [fn(...args)], args)
 );
 
-let s = '   MARCUS AURELIUS   ';
+const s = '   MARCUS AURELIUS   ';
 console.log(s);
 console.log('lower(' + s + ') = ' + lower(s));
 console.log('upperCapital(' + s + ') = ' + upperCapital(s));
 
-let capitalize = compose(trim, lower, upperCapital);
+const capitalize = compose(trim, lower, upperCapital);
 console.log('capitalize(' + s + ') = ' + capitalize(s));
 
 function upperCapital(s) {
-  return s.replace(/\w+/g, function(word) {
-    return word.charAt(0).toUpperCase() + word.substr(1);
-  });
+  return s.replace(/\w+/g, (word) =>
+     word.charAt(0).toUpperCase() + word.substr(1)
+  );
 }
 
 function lower(s) {

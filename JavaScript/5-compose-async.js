@@ -3,11 +3,11 @@
 global.api = {};
 api.fs = require('fs');
 
-let reduceAsync = function(items, performer, callback, initialValue) {
-  var nseted = (typeof(initialValue) === 'undefined'),
-      counter = nseted ? 1 : 0,
-      previous = nseted ? items[0] : initialValue,
-      current = nseted ? items[1] : items[0];
+const reduceAsync = function(items, performer, callback, initialValue) {
+  const nseted = typeof(initialValue) === 'undefined';
+  let counter = nseted ? 1 : 0;
+  let previous = nseted ? items[0] : initialValue;
+  let current = nseted ? items[1] : items[0];
 
   function response(err, data) {
     if (!err && counter !== items.length - 1) {
@@ -31,9 +31,7 @@ let reduceAsync = function(items, performer, callback, initialValue) {
 function composeAsync(params, ...args) {
   reduceAsync(
     args.slice(0, -1),
-    (params, fn, callback) => fn.apply(
-      null, [].concat(params).concat(callback)
-    ),
+    (params, fn, callback) => fn(...[].concat(params).concat(callback)),
     args[args.length - 1],
     params
   );
