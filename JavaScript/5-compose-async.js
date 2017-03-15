@@ -3,8 +3,8 @@
 global.api = {};
 api.fs = require('fs');
 
-const reduceAsync = function(items, performer, callback, initialValue) {
-  const nseted = typeof(initialValue) === 'undefined';
+const reduceAsync = function(items, performer, done, initialValue) {
+  const nseted = initialValue === undefined;
   let counter = nseted ? 1 : 0;
   let previous = nseted ? items[0] : initialValue;
   let current = nseted ? items[1] : items[0];
@@ -15,29 +15,29 @@ const reduceAsync = function(items, performer, callback, initialValue) {
       previous = data;
       current  = items[counter];
       performer(previous, current, response, counter, items);
-    } else if (callback) {
-      callback(err, data);
+    } else if (done) {
+      done(err, data);
     }
   }
 
   performer(previous, current, response, counter, items);
 };
 
-// params - array of parametrs for functions
+// funcs - array of parametrs for functions
 // args - array of functions
 // args[i] - function
-// args[-1] - callback(err, data)
+// args[-1] - done(err, data)
 //
-function composeAsync(params, ...args) {
-  reduceAsync(
+const composeAsync = (funcs, ...args) => (
+  () => reduceAsync(
     args.slice(0, -1),
-    (params, fn, callback) => fn(...[].concat(params).concat(callback)),
+    (params, fn, done) => fn(...[].concat(params).concat(done)),
     args[args.length - 1],
-    params
-  );
-}
+    funcs
+  )
+);
 
-composeAsync(
+const cf1 = composeAsync(
   ['config.txt', 'utf8'],
   read,
   parse,
@@ -46,6 +46,8 @@ composeAsync(
     if (!err) console.log(data);
   }
 );
+
+cf1();
 
 function wrapAsync(callback) {
   setTimeout(callback, Math.floor((Math.random() * 1000)));
