@@ -3,7 +3,7 @@
 global.api = {};
 api.fs = require('fs');
 
-const reduceAsync = function(items, performer, done, initialValue) {
+const reduceAsync = (items, performer, done, initialValue) => {
   const nseted = initialValue === undefined;
   let counter = nseted ? 1 : 0;
   let previous = nseted ? items[0] : initialValue;
