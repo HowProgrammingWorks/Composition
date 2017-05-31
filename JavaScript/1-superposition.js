@@ -2,12 +2,12 @@
 
 const pow = Math.pow;
 const sqrt = Math.sqrt;
-const inc = x => x + 1;
+const inc = x => ++x;
 const add = (a, b) => a + b;
 const mul = (a, b) => a * b;
 const div = (a, b) => a / b;
 const log = (base, n) => Math.log(n) / Math.log(base);
-const iff = (e, x1, x2) => e ? x1 : x2;
+const iff = (e, x1, x2) => (e ? x1 : x2);
 const loop = (from, to, fn) => {
   for (let i = from; i <= to; i++) fn(i);
 };
