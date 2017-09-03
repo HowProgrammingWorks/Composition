@@ -1,7 +1,6 @@
 'use strict';
 
-global.api = {};
-api.fs = require('fs');
+const fs = require('fs');
 
 const reduceAsync = (items, performer, done, initialValue) => {
   const nseted = initialValue === undefined;
@@ -55,7 +54,7 @@ function wrapAsync(callback) {
 
 function read(file, charset, callback) {
   console.dir({ read: { file, callback } });
-  api.fs.readFile(file, charset, callback);
+  fs.readFile(file, charset, callback);
 }
 
 function parse(data, callback) {
