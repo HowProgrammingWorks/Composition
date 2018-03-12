@@ -10,7 +10,7 @@ const reduceAsync = (items, performer, done, initialValue) => {
 
   function response(err, data) {
     if (!err && counter !== items.length - 1) {
-      ++counter;
+      counter++;
       previous = data;
       current  = items[counter];
       performer(previous, current, response, counter, items);
@@ -22,6 +22,8 @@ const reduceAsync = (items, performer, done, initialValue) => {
   performer(previous, current, response, counter, items);
 };
 
+const last = arr => arr[arr.length - 1];
+
 // funcs - array of parametrs for functions
 // args - array of functions
 // args[i] - function
@@ -31,7 +33,7 @@ const composeAsync = (funcs, ...args) => (
   () => reduceAsync(
     args.slice(0, -1),
     (params, fn, done) => fn(...[].concat(params).concat(done)),
-    args[args.length - 1],
+    last(args),
     funcs
   )
 );
