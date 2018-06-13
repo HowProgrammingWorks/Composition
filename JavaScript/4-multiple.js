@@ -4,6 +4,16 @@ const compose = (...funcs) => (...args) => (
   funcs.reduce((args, fn) => [fn(...args)], args)
 );
 
+// Usage
+
+const upperCapital = s => s.replace(
+  /\w+/g, word => word.charAt(0).toUpperCase() + word.substr(1)
+);
+
+const lower = s => (typeof(s) === 'string' ? s.toLowerCase() : '');
+
+const trim = s => s.trim();
+
 const s = '   MARCUS AURELIUS   ';
 console.log(s);
 console.log('lower(' + s + ') = ' + lower(s));
@@ -11,17 +21,3 @@ console.log('upperCapital(' + s + ') = ' + upperCapital(s));
 
 const capitalize = compose(trim, lower, upperCapital);
 console.log('capitalize(' + s + ') = ' + capitalize(s));
-
-function upperCapital(s) {
-  return s.replace(/\w+/g, (word) =>
-     word.charAt(0).toUpperCase() + word.substr(1)
-  );
-}
-
-function lower(s) {
-  return typeof(s) === 'string' ? s.toLowerCase() : '';
-}
-
-function trim(s) {
-  return s.trim();
-}
