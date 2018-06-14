@@ -8,7 +8,7 @@ const reduceAsync = (items, performer, done, initialValue) => {
   let previous = nseted ? items[0] : initialValue;
   let current = nseted ? items[1] : items[0];
 
-  function response(err, data) {
+  const response = (err, data) => {
     if (!err && counter !== items.length - 1) {
       counter++;
       previous = data;
@@ -17,7 +17,7 @@ const reduceAsync = (items, performer, done, initialValue) => {
     } else if (done) {
       done(err, data);
     }
-  }
+  };
 
   performer(previous, current, response, counter, items);
 };
@@ -38,6 +38,31 @@ const composeAsync = (funcs, ...args) => (
   )
 );
 
+// Usage
+
+const randomize = max => Math.floor((Math.random() * max));
+
+const wrapAsync = callback => setTimeout(callback, randomize(1000));
+
+const read = (file, charset, callback) => {
+  console.dir({ read: { file, callback } });
+  fs.readFile(file, charset, callback);
+};
+
+const parse = (data, callback) => {
+  console.dir({ parse: { data, callback } });
+  wrapAsync(() => {
+    callback(null, ['Data has been', 'processed!']);
+  });
+};
+
+const preprocess = (data1, data2, callback) => {
+  console.dir({ preprocess: { data1, data2, callback } });
+  wrapAsync(() => {
+    callback(null, data1 + ' ' + data2);
+  });
+};
+
 const cf1 = composeAsync(
   ['config.txt', 'utf8'],
   read,
@@ -49,26 +74,3 @@ const cf1 = composeAsync(
 );
 
 cf1();
-
-function wrapAsync(callback) {
-  setTimeout(callback, Math.floor((Math.random() * 1000)));
-}
-
-function read(file, charset, callback) {
-  console.dir({ read: { file, callback } });
-  fs.readFile(file, charset, callback);
-}
-
-function parse(data, callback) {
-  console.dir({ parse: { data, callback } });
-  wrapAsync(() => {
-    callback(null, ['Data has been', 'processed!']);
-  });
-}
-
-function preprocess(data1, data2, callback) {
-  console.dir({ preprocess: { data1, data2, callback } });
-  wrapAsync(() => {
-    callback(null, data1 + ' ' + data2);
-  });
-}
