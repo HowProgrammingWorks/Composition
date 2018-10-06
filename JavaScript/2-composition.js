@@ -10,10 +10,10 @@ const upperCapital = s => s.split(' ')
 
 const lower = s => s.toLowerCase();
 
+const capitalize = compose(lower, upperCapital);
+
 const s = 'MARCUS AURELIUS';
 console.log(s);
-console.log('lower(' + s + ') = ' + lower(s));
-console.log('upperCapital(' + s + ') = ' + upperCapital(s));
-
-const capitalize = compose(lower, upperCapital);
-console.log('capitalize(' + s + ') = ' + capitalize(s));
+console.log(`lower('${s}') = '${lower(s)}'`);
+console.log(`upperCapital('${s}') = '${upperCapital(s)}'`);
+console.log(`capitalize('${s}') = '${capitalize(s)}'`);
