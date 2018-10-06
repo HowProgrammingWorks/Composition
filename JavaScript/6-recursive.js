@@ -14,7 +14,7 @@ const upperCapital = s => s.split(' ')
   .map(word => word.charAt(0).toUpperCase() + word.slice(1))
   .join(' ');
 
-const lower = s => (typeof s === 'string' ? s.toLowerCase() : '');
+const lower = s => s.toLowerCase();
 
 const trim = s => s.trim();
 
