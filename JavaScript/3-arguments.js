@@ -4,10 +4,9 @@ const compose = (f1, f2) => (...args) => f2(f1(...args));
 
 // Usage
 
-const upperCapital = s => s.replace(
-  /\w+/g,
-  word => word.charAt(0).toUpperCase() + word.substr(1)
-);
+const upperCapital = s => s.split(' ')
+  .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+  .join(' ');
 
 const lower = s => (typeof s === 'string' ? s.toLowerCase() : '');
 
