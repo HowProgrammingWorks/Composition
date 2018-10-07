@@ -10,9 +10,9 @@ const compose = (...fns) => (...args) => {
 
 // Usage
 
-const upperCapital = s => s.split(' ')
-  .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-  .join(' ');
+const upperFirst = word => word.charAt(0).toUpperCase() + word.slice(1);
+
+const upperCapital = s => s.split(' ').map(upperFirst).join(' ');
 
 const lower = s => s.toLowerCase();
 
