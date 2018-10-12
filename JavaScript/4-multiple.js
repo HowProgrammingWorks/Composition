@@ -1,8 +1,7 @@
 'use strict';
 
-const compose = (...fns) => (...args) => (
-  fns.reduce((args, fn) => [fn(...args)], args)
-);
+const compose = (...fns) => (...args) => fns
+  .reduce((args, fn) => [fn(...args)], args);
 
 // Usage
 
