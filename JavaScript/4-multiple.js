@@ -1,7 +1,7 @@
 'use strict';
 
 const compose = (...fns) => (...args) => fns
-  .reduce((args, fn) => [fn(...args)], args);
+  .reduce((args, fn) => [fn(...args)], args)[0];
 
 // Usage
 
