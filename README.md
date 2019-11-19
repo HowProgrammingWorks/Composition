@@ -1,2 +1,3 @@
-# Composition
-[![Композиция, каррирование, частичное применение](https://img.youtube.com/vi/ND8KQ5xjk7o/0.jpg)](https://www.youtube.com/watch?v=ND8KQ5xjk7o)
+## Композиция функций
+
+[![Композиция функций (pipe, compose) в JavaScript](https://img.youtube.com/vi/xS9FicVrOTI/0.jpg)](https://www.youtube.com/watch?v=xS9FicVrOTI)
