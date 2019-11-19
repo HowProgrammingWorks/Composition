@@ -1,0 +1,28 @@
+({
+  name: 'pipe',
+  length: [150, 300],
+  test: pipe => {
+    const inc = x => ++x;
+    const twice = x => x * 2;
+    const cube = x => x ** 3;
+    {
+      const f = pipe(inc, twice, cube);
+      const x = f(5);
+      if (x !== 1728) throw new Error(`Expected 1728 instead of ${x}`);
+    }
+    {
+      const f = pipe(inc, inc);
+      const x = f(7);
+      if (x !== 9) throw new Error(`Expected 9 instead of ${x}`);
+    }
+    {
+      let catched = false;
+      try {
+        pipe(7, 3);
+      } catch (err) {
+        catched = true;
+      }
+      if (!catched) throw new Error(`Function pipe should throw`);
+    }
+  }
+})
