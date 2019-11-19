@@ -8,17 +8,17 @@ function AddOnlySet(it) {
   this.size = it.length;
 }
 
-AddOnlySet.prototype.add = function(value) {
+AddOnlySet.prototype.add = function (value) {
   this.set.add(value);
   this.size = this.set.size;
   this.emitter.emit('add', value);
 };
 
-AddOnlySet.prototype.on = function(name, listener) {
+AddOnlySet.prototype.on = function (name, listener) {
   this.emitter.on(name, listener);
 };
 
-AddOnlySet.prototype.toString = function() {
+AddOnlySet.prototype.toString = function () {
   return [...this.set.values()].join();
 };
 
