@@ -1,0 +1,46 @@
+({
+  name: 'compose',
+  length: [300, 600],
+  test: compose => {
+    const inc = x => ++x;
+    const twice = x => x * 2;
+    const cube = x => x ** 3;
+    const fail = x => {
+      throw new Error(`Function fail(${x})`);
+    };
+    {
+      const f = compose(inc, twice, cube);
+      f.on('error', error => {
+        throw new Error('Unexpected error');
+      });
+      let x;
+      try {
+        x = f(5);
+      } catch (error) {
+        throw new Error(`Unexpected throw`);
+      }
+      if (x !== 251) {
+        throw new Error(`Expected 251 instead of ${x}`);
+      }
+    }
+    {
+      let errorDetected = false;
+      const f = compose(inc, twice, fail, cube);
+      f.on('error', error => {
+        errorDetected = true;
+      });
+      let x;
+      try {
+        x = f(5);
+      } catch (error) {
+        throw new Error(`Unexpected throw`);
+      }
+      if (!errorDetected) {
+        throw new Error(`Expected error event is not received`);
+      }
+      if (x !== undefined) {
+        throw new Error(`Expected undefined instead of ${x}`);
+      }
+    }
+  }
+})
