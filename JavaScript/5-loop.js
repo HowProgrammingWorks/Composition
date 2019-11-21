@@ -1,7 +1,6 @@
 'use strict';
 
 const compose = (...fns) => x => {
-  if (fns.length === 0) return x;
   const last = fns.length - 1;
   let res = x;
   for (let i = last; i >= 0; i--) {
@@ -11,7 +10,6 @@ const compose = (...fns) => x => {
 };
 
 const pipe = (...fns) => x => {
-  if (fns.length === 0) return x;
   let res = x;
   for (let i = 0; i < fns.length; i++) {
     res = fns[i](res);
