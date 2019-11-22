@@ -2,26 +2,19 @@
 
 const compose = (...fns) => {
   const events = {};
-  const fn = num => {
-    return fns.reverse().reduce((val, fn) => {
-      try {
-        return fn(val);
-      } catch (e) {
-        fn.emmit('error', e)
-        return undefined;
-      }
-    }, num);
-  };
+  const fn = num => fns.reverse().reduce((val, f) => {
+    try {
+      if (typeof val === 'undefined') return undefined;
+      return f(val);
+    } catch (e) {
+      const err = events['error'];
+      if (err) err(e);
+      return undefined;
+    }
+  }, num);
   fn.on = (event, callback) => {
-    let res = events[event];
-    if (!res) res = [];
-    res.push(callback);
-    events[event] = res;
-  }
-  fn.emmit = (event, ...args) => {
-    const res = events[event];
-    if (res) res.forEach(callback => callback(...args));
-  }
+    events[event] = callback;
+  };
   return fn;
 };
 
