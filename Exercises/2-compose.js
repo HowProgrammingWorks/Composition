@@ -19,8 +19,10 @@ const compose = (...fns) => {
     }
   };
 
-  fn.on = callback => {
-    errors.forEach(err => callback(err));
+  fn.on = (name, callback) => {
+    if (name === 'error') {
+      errors.push(callback);
+    }
   };
 
   return fn;
