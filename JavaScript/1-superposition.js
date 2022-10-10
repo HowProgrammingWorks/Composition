@@ -3,7 +3,7 @@
 const { log: ln } = Math;
 const pow = Math.pow;
 const sqrt = Math.sqrt;
-const inc = x => ++x;
+const inc = (x) => ++x;
 const add = (a, b) => a + b;
 const mul = (a, b) => a * b;
 const div = (a, b) => a / b;
@@ -28,4 +28,4 @@ console.log('Loop from 5 to 10');
 loop(5, 10, console.log);
 
 console.log('Loop from 5 to 10, write < 8');
-loop(5, 10, x => iff(x < 8, console.log, () => {})(x));
+loop(5, 10, (x) => iff(x < 8, console.log, () => {})(x));

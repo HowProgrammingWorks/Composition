@@ -5,9 +5,9 @@ const pipe = (f, g) => (...args) => g(f(...args));
 
 // Usage
 
-const upperFirst = word => word.charAt(0).toUpperCase() + word.slice(1);
-const upperCapital = s => s.split(' ').map(upperFirst).join(' ');
-const lower = s => s.toLowerCase();
+const upperFirst = (word) => word.charAt(0).toUpperCase() + word.slice(1);
+const upperCapital = (s) => s.split(' ').map(upperFirst).join(' ');
+const lower = (s) => s.toLowerCase();
 
 const s = 'MARCUS AURELIUS';
 console.log(s);

@@ -25,6 +25,6 @@ AddOnlySet.prototype.toString = function() {
 // Usage
 
 const s1 = new AddOnlySet(['uno', 'due']);
-s1.on('add', value => console.log(`Added "${value}"`));
+s1.on('add', (value) => console.log(`Added "${value}"`));
 s1.add('tre');
 console.dir({ result: s1.toString() });

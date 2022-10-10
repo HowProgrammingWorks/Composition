@@ -2,7 +2,7 @@
 
 const compose = (...fns) => {
   const handlers = [];
-  const composed = x => {
+  const composed = (x) => {
     if (fns.length === 0) return x;
     const last = fns.length - 1;
     let res = x;

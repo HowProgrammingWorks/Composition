@@ -22,7 +22,7 @@ const reduceAsync = (items, performer, done, initialValue) => {
   performer(previous, current, response, counter, items);
 };
 
-const last = arr => arr[arr.length - 1];
+const last = (arr) => arr[arr.length - 1];
 
 // funcs - array of parametrs for functions
 // args - array of functions
@@ -40,9 +40,9 @@ const composeAsync = (funcs, ...args) => (
 
 // Usage
 
-const randomize = max => Math.floor((Math.random() * max));
+const randomize = (max) => Math.floor((Math.random() * max));
 
-const wrapAsync = callback => setTimeout(callback, randomize(1000));
+const wrapAsync = (callback) => setTimeout(callback, randomize(1000));
 
 const read = (file, charset, callback) => {
   console.dir({ read: { file, callback } });
