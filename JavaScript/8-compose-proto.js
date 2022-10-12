@@ -1,6 +1,6 @@
 'use strict';
 
-const { EventEmitter } = require('events');
+const { EventEmitter } = require('node:events');
 
 function AddOnlySet(it) {
   this.set = new Set(it);
