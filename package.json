@@ -5,8 +5,9 @@
   "author": "Timur Shemsedinov <timur.shemsedinov@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "test": "eslint ./Exercises; hpw",
-    "ci": "eslint ./Exercises && hpw"
+    "test": "npm run -s lint; npm run -s hpw",
+    "lint": "eslint ./Exercises",
+    "hpw": "hpw"
   },
   "dependencies": {
     "eslint": "^7.23.0",
