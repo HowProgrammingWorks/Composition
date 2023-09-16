@@ -15,6 +15,7 @@ const compose = (...fns) => {
       for (const handler of handlers) {
         handler(error);
       }
+      return null;
     }
   };
   composed.on = (name, handler) => {
