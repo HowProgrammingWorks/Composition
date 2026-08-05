@@ -1,12 +1,12 @@
 'use strict';
 
 const pipe = (...fns) => {
-  for (const f of fns) {
-    if (typeof f !== 'function') {
-      throw new Error('All compose arguments should be functions');
+  for (const fn of fns) {
+    if (typeof fn !== 'function') {
+      throw new Error('All pipe arguments should be functions');
     }
   }
-  return (x) => fns.reduce((v, f) => f(v), x);
+  return (x) => fns.reduce((value, fn) => fn(value), x);
 };
 
 module.exports = { pipe };

@@ -3,16 +3,16 @@
 const fs = require('node:fs');
 
 const reduceAsync = (items, performer, done, initialValue) => {
-  const nseted = initialValue === undefined;
-  let counter = nseted ? 1 : 0;
-  let previous = nseted ? items[0] : initialValue;
-  let current = nseted ? items[1] : items[0];
+  const nested = initialValue === undefined;
+  let counter = nested ? 1 : 0;
+  let previous = nested ? items[0] : initialValue;
+  let current = nested ? items[1] : items[0];
 
   const response = (err, data) => {
     if (!err && counter !== items.length - 1) {
       counter++;
       previous = data;
-      current  = items[counter];
+      current = items[counter];
       performer(previous, current, response, counter, items);
     } else if (done) {
       done(err, data);
@@ -24,23 +24,24 @@ const reduceAsync = (items, performer, done, initialValue) => {
 
 const last = (arr) => arr[arr.length - 1];
 
-// funcs - array of parametrs for functions
+// funcs - array of parameters for functions
 // args - array of functions
 // args[i] - function
 // args[-1] - done(err, data)
 //
-const composeAsync = (funcs, ...args) => (
-  () => reduceAsync(
-    args.slice(0, -1),
-    (params, fn, done) => fn(...[].concat(params).concat(done)),
-    last(args),
-    funcs
-  )
-);
+const composeAsync = (funcs, ...args) => {
+  const fns = args.slice(0, -1);
+  const done = last(args);
+  const performer = (params, fn, next) => {
+    const allArgs = [].concat(params).concat(next);
+    fn(...allArgs);
+  };
+  return () => reduceAsync(fns, performer, done, funcs);
+};
 
 // Usage
 
-const randomize = (max) => Math.floor((Math.random() * max));
+const randomize = (max) => Math.floor(Math.random() * max);
 
 const wrapAsync = (callback) => setTimeout(callback, randomize(1000));
 
@@ -59,7 +60,7 @@ const parse = (data, callback) => {
 const preprocess = (data1, data2, callback) => {
   console.dir({ preprocess: { data1, data2, callback } });
   wrapAsync(() => {
-    callback(null, data1 + ' ' + data2);
+    callback(null, `${data1} ${data2}`);
   });
 };
 
