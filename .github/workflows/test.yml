@@ -1,6 +1,10 @@
-name: Check labs
+name: Lint
 
-on: pull_request
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
 
 jobs:
   build:
@@ -18,4 +22,4 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
       - run: npm ci
-      - run: npm t
+      - run: npm run lint
